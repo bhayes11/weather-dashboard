@@ -2,8 +2,11 @@ $(document).ready(function () {
   console.log("hello");
 
   //Main city forecast
-  var apiKey = "dddf68f4c5f61b00d927351a5e055c6d";
-  var queryURL = "https://api.openweathermap.org/data/2.5/weather?id=" + apiKey;
+  var apiKey = "63de61e390b4a0f5e75ff9df058d248b";
+  var queryURL =
+    "https://api.openweathermap.org/data/2.5/weather?q=atlanta" +
+    "&appid=" +
+    apiKey;
 
   $.ajax({
     url: queryURL,
