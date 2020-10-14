@@ -5,7 +5,7 @@ $(document).ready(function () {
   //function cityForecast(city) {
   var apiKey = "63de61e390b4a0f5e75ff9df058d248b";
   var queryURL =
-    "https://api.openweathermap.org/data/2.5/weather?q=Atlanta" +
+    "https://api.openweathermap.org/data/2.5/weather?q=" +
     city +
     "&appid=" +
     apiKey;
