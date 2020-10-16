@@ -1,31 +1,43 @@
 $(document).ready(function () {
   //console.log("hello");
 
-  //Main city forecast
-  //function cityForecast(city) {
-  var apiKey = "63de61e390b4a0f5e75ff9df058d248b";
-  var queryURL =
-    "https://api.openweathermap.org/data/2.5/weather?q=" +
-    city +
-    "&appid=" +
-    apiKey;
-
-  $.ajax({
-    url: queryURL,
-    method: "GET",
-  }).then(function (response) {
-    console.log(queryURL);
-    console.log(response);
-
-    //var tempF = (response.main.temp - 273.15) * 1.8 + 32;
-
-    $("currentCityTemp").text(tempF + "F");
-    //var lat = response.coord.lat;
-    //var lon = response.coord.lon;
-    //queryURL = "https://api.openweathermap.org/data/2.5/weather?q=;
+  //call back function
+  $('#searchBtn').click(function () {
+    var cityName = $("#form-city").val();
+    console.log(cityName)
+    cityForecast(cityName);
   });
-  //}
 
-  //document.getElementById("searchBtn").addEventListener("click", cityForecast);
-  //console.log(searchBtn + "clicked");
+
+  //Main city forecast
+  function cityForecast(cityNameValue) {
+    var apiKey = "63de61e390b4a0f5e75ff9df058d248b";
+    var queryURL =
+      "https://api.openweathermap.org/data/2.5/weather?q=" +
+      cityNameValue +
+      "&appid=" +
+      apiKey;
+    console.log(queryURL)
+    $.ajax({
+      url: queryURL,
+      method: "GET",
+      dataType: "json",
+      success: function (response) {
+
+        console.log(response);
+
+        var tempF = Math.round((response.main.temp - 273.15) * 1.8 + 32);
+
+        $("#currentCityTemp").text(tempF + "F");
+
+        $("#currentCityHumid").text(response.main.humidity);
+        $("#currentCityWind").text(response.wind.speed);
+        var lat = response.coord.lat;
+        var lon = response.coord.lon;
+      }
+
+    });
+  }
+
+
 });
